@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <form method="POST">
+      {% csrf_token %}
+      <p id="registrationform">Kubernaam: {{form.username}}</p>
+      <p id="registrationform">Naam: {{form.first_name}}</p>
+      <p id="registrationform">Van: {{form.last_name}}</p>
+      <p id="registrationform">e-pos: {{form.email}}</p>
+      <p id="registrationform">Wagwoord: {{form.password1}}</p>
+      <ul>
+        <li>Jou wagwoord mag nie van jou pesoonlike inligting bevat nie.</li>
+        <li>Moet 8 karakters of langer wees.</li>
+        <li>Mag nie net uit nommers bestaan nie.</li>
+        <li>Mag nie 'n algemene wagwoord wees nie. bv. - password</li>
+      </ul>
+      <p id="registrationform">Herhaal wagwoord: {{form.password2}}</p>
+      <input type="submit" class="btn btn-primary" value="Registreer">
+    </form>
+    </div>
+  </div>
+  <script src="{% static "JS/nuwelede.js" %}"></script>
+  {% endblock %}

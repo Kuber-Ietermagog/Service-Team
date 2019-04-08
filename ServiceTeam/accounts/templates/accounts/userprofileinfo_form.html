@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <p id="registrationform">Profile Photo: {{form.profile_pic}}</p>
+        <p id="registrationform">Cell Phone: {{form.cell_phone}}</p>
+        <input type="submit" class="btn btn-warning" value="Update">
+        <a href="{% url 'accounts:user_list' %}" class="btn btn-primary glyphicon glyphicon-step-backward" role="button"> Cancel</a>
+      </form>
+    </div>
+  </div>
+  <script src="{% static "JS/lede.js" %}"></script>
+  {% endblock %}

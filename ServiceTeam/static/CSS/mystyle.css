@@ -1,0 +1,240 @@
+#topnav{
+  color: white;
+  background-color: rgba(48, 48, 48, .95);
+}
+#leftMenuItems{
+  color: white;
+}
+
+#myform{
+  font-size: 12px;
+}
+
+#userID{
+  color: yellow;
+}
+
+#logging{
+  color: yellow;
+}
+
+#myNavbar{
+  color: white;
+}
+
+#timeDate{
+  color: white;
+}
+
+#registrationform{
+  font-size: 14px;
+}
+
+#id_date{
+  font-size: 14px;
+  color: yellow;
+}
+
+#id_profile_pic{
+  color: white;
+  font-size: 10px;
+  width: 100%;
+}
+
+#id_slag_spreek{
+  width: 100%;
+}
+
+#id_email{
+  width: 100%;
+}
+
+#id_cultivar{
+  color: black;
+  width: 200px;
+}
+
+.btn-gold{
+  border-color: #CFB53B;
+  background-color: #CFB53B;
+}
+
+.btn-silver{
+  background-color: #C0C0C0;
+  border-color: #C0C0C0;
+}
+
+.btn-bronze{
+  background-color: #8C7853;
+  border-color: #8C7853;
+}
+
+.btn-green{
+  background-color: #4dc105;
+  border-color: #4dc105;
+}
+
+.btn-blood{
+  background: #930101;
+  border-color: #930101;
+}
+
+#results_point{
+  color: #fa00ff;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#registers{
+  text-align: center;name
+}
+#id_name{
+  width: 220px;
+}
+a{
+  color: yellow;
+}
+
+#chatlog{
+  color: yellow;
+  font-size: 16px;
+}
+
+#dtstamp{
+  color: #33bbff;
+  font-weight: bold;
+}
+
+.chatbox{
+  color: black;
+  /* width: 100px; */
+}
+
+.shrinkbox{
+  /* float: left; */
+  width: 50%;
+}
+
+.search-container{
+  margin: 4%;
+  margin-right: 16px;
+  /* float: right;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  border: none;
+  font-size: 17px; */
+}
+
+
+#myjumbotron{
+  color: white;
+  background-color: rgba(48, 48, 48, .7);
+}
+
+.calendar_entry{
+  margin: 5px;
+  background-color: rgba(48, 48, 48, .7);
+}
+
+.calendar_name{
+  color: yellow;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.calendar_date{
+  /* color: #33bbff; */
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.calendar_button{
+  margin-bottom: 5px;
+}
+
+#tasting_location{
+  color: #f99d2c;
+}
+
+#event_button{
+  margin: 5px;
+}
+
+#calendar_description{
+  font-size: 16px;
+}
+
+#calendar_created{
+  font-size: 12px;
+  color: #33bbff;
+}
+
+#calendar_description_block{
+  color: black;
+  font-size: 14px;
+}
+
+#id_date{
+  color: black;
+}
+
+#id_comments{
+  color: black;
+}
+
+#wyneproe_kode{
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+
+#myBody{
+  /* background-image: url("LOGO.jpg"); */
+  /* background-repeat: repeat; */
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 10%;
+  font-family: monospace;
+  /* color: green; */
+  background-color: gray;
+}
+
+input{
+  color: black;
+}
+@media screen{
+  #printlogo{
+    display: none;
+  }
+  #printheader{
+    display: none;
+  }
+  #myTable{
+    text-align: center;
+    color: black;
+    background-color: white;
+    font-size: 14px;
+    border-width: medium;
+  }
+}
+
+
+.getlost{
+  display: none;
+}
+
+
+#saveButton{
+  margin-bottom: 10px;
+  margin-left: 25%;
+  width: 50%;
+  font-size: 20px;
+}
+
+.myTextArea{
+  color: black;
+  width: 95%;
+}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <form method="POST">
+      {% csrf_token %}
+      <p id="registrationform">User Name: <input type="text" name="username" placeholder="Enter Username"></p>
+      <p id="registrationform">Password: <input type="password" name="password"></p>
+      <input type="submit" class="btn btn-primary" value="Login">
+      <!-- <input type="hidden" name="next" value="{{ next }}"> -->
+    </form>
+    </div>
+  </div>
+  <script src="{% static "JS/login.js" %}"></script>
+  {% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      {% for lede in club_users %}
+        {% if user.username == lede.user.username %}
+          {% if lede.profile_pic %}
+            <img src="{{ lede.profile_pic.url }}" alt="no image" width="100" height="100">
+          {% else %}
+            <p>No Photo!</p>
+          {% endif %}
+          <p id="registrationform">Username: {{lede.user.username}}</p>
+          <p id="registrationform">Employee Number: {{lede.employee_no}}</p>
+          <p id="registrationform">Name: {{lede.user.first_name}}</p>
+          <p id="registrationform">Surname: {{lede.user.last_name}}</p>
+          <p id="registrationform">Email: {{lede.user.email}}</p>
+          <p id="registrationform">Cell Phone: {{lede.cell_phone}}</p>
+          <p></p>
+          <p><a href="{% url 'accounts:user_update' pk=lede.user_id %}" class="btn btn-warning glyphicon glyphicon-edit" role="button"> Update</a></p>
+          <p><a href="{% url 'accounts:profile_update' pk=lede.pk %}" class="btn btn-primary glyphicon glyphicon-picture" role="button"> Pesonal</a></p>
+          <p><a href="{% url 'password_change' %}" class="btn btn-danger glyphicon glyphicon-sunglasses" role="button"> Change Password</a></p>
+          <hr>
+        {% endif %}
+      {% endfor %}
+    {% for lede in club_users %}
+      {% if user.username != lede.user.username %}
+        {% if lede.profile_pic %}
+          <img src="{{ lede.profile_pic.url }}" alt="no image" width="100" height="100">
+        {% else %}
+          <p>No Photo!</p>
+        {% endif %}
+        <p id="registrationform">Username: {{lede.user.username}}</p>
+        <p id="registrationform">Employee Number: {{lede.employee_no}}</p>
+        <p id="registrationform">Name: {{lede.user.first_name}}</p>
+        <p id="registrationform">Surname: {{lede.user.last_name}}</p>
+        <p id="registrationform">Email: {{lede.user.email}}</p>
+        <p id="registrationform">Cell Phone: {{lede.cell_phone}}</p>
+        <p></p>
+        <hr>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+  <script src="{% static "JS/lede.js" %}"></script>
+  {% endblock %}
