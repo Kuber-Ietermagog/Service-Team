@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <h3>EMPLOYEE MONTHLY TIME SHEETS</h3>
+      <p></p>
+      <table>
+        <tr>
+          <th>EMPLOYEE No.</th>
+          <th>MONTH</th>
+          <th>VIEW</th>
+        </tr>
+        {% for items in team_members %}
+          <tr>
+            <td>{{ items.employee_no }}</td>
+            <td>{{ this_month }}</td>
+            <form method="POST">
+              {% csrf_token %}
+              <td><input id="timeSheet" type="submit" class="btn btn-primary glyphicon glyphicon-plus" value="{{ items.user }}" name="thisMember"></td>
+            </form>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+  <script>
+    $("#timeSheetMenu").css("background-color", "rgba(48, 150, 150, .95)");
+  </script>
+  {% endblock %}

@@ -30,6 +30,24 @@
   font-size: 14px;
 }
 
+#work_drop_down{
+  font-size: 14px;
+  color: black;
+}
+
+#clock_drop_down{
+  font-size: 14px;
+  color: black;
+}
+
+#pos_latitude{
+  font-size: 14px;
+}
+
+#pos_longitude{
+  font-size: 14px;
+}
+
 #id_date{
   font-size: 14px;
   color: yellow;
@@ -210,14 +228,28 @@ input{
     display: none;
   }
   #printheader{
+    display: block;
+  }
+  #app_table, th, td{
+    border: 1px solid white;
+    text-align: center;
+    padding: 3px;
+    font-size: 10px;
+  }
+}
+
+@media print{
+  #printlogo{
     display: none;
   }
-  #myTable{
+  #printheader{
+    display: none;
+  }
+  #app_table, th, td{
+    border: 1px solid black;
     text-align: center;
-    color: black;
-    background-color: white;
-    font-size: 14px;
-    border-width: medium;
+    padding: 3px;
+    font-size: 10px;
   }
 }
 
@@ -237,4 +269,13 @@ input{
 .myTextArea{
   color: black;
   width: 95%;
+}
+
+#timeSheet{
+  width: 100px;
+  font-size: 14px;
+}
+
+#id_name{
+  readonly;
 }

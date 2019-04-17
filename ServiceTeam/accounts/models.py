@@ -8,6 +8,8 @@ class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, related_name="main_user", on_delete=models.CASCADE)
 
     # additional
+    job_title = models.CharField(blank=True, max_length=100)
+    department = models.CharField(blank=True, max_length=100)
     profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
     employee_no = models.CharField(max_length=256, blank=True, null=True)
     cell_phone = models.CharField(max_length=256, blank=True, null=True)

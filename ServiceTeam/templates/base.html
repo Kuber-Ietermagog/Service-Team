@@ -27,6 +27,7 @@
             <li id="ledeMenu"><a id="leftMenuItems" href="{% url 'accounts:user_list' %}">TEAM MEMBERS</a></li>
             <li id="clockMenu"><a id="leftMenuItems" href="{% url 'clock_card:clock' %}">CLOCK CARD</a></li>
               {% if perms.auth.can_reg_usr %}
+              <li id="timeSheetMenu"><a id="leftMenuItems" href="{% url 'time_sheets:teamlist' %}">TIME SHEETS</a></li>
               <li id="registerMenu"><a id="leftMenuItems" href="{% url 'accounts:newuser' %}">REGISTER</a></li>
               {% endif %}
               {% if perms.auth.add_permission %}

@@ -2,29 +2,37 @@
   {% load staticfiles %}
   {% block body_block %}
   <div class="container">
+    <button id="printheader" onclick="window.location='{% url 'clock_card:clock_entry' %}'"type="button" class="btn btn-warning glyphicon glyphicon-plus event"> Clock Now</button>
+    <p></p>
     <div class="jumbotron" id="myjumbotron">
-      <p>Click the button to get your coordinates.</p>
-
-        <button onclick="getLocation()">Try It</button>
-
-        <p id="demo"></p>
-
-        <script>
-          var x = document.getElementById("demo");
-
-          function getLocation() {
-            if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-              x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-          }
-
-          function showPosition(position) {
-            x.innerHTML = "Latitude: " + position.coords.latitude +
-            "<br>Longitude: " + position.coords.longitude;
-          }
-        </script>
+      <p id="registrationform">Total Hours: {{ time_clocked }}</p>
+      <table id="app_table">
+        <tr>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Street</th>
+          <th>City</th>
+          <th>Country</th>
+          <th>Work Type</th>
+          <th>Clock</th>
+          <th>Hours</th>
+        </tr>
+      {% for items in display_filter %}
+        <tr>
+          <td>{{ items.name }}</td>
+          <td>{{ items.date }}</td>
+          <td>{{ items.street }}</td>
+          <td>{{ items.city }}</td>
+          <td>{{ items.country }}</td>
+          <td>{{ items.work_st }}</td>
+          <td>{{ items.clock_io }}</td>
+          <td>{{ items.hours_worked }}</td>
+        </tr>
+      {% endfor %}
+    </table>
     </div>
   </div>
+  <script>
+    $("#clockMenu").css("background-color", "rgba(48, 150, 150, .95)");
+  </script>
   {% endblock %}

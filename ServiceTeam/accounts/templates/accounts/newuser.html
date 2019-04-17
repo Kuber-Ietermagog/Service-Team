@@ -18,6 +18,8 @@
       <p id="registrationform">Email: {{user_form.email}}</p>
       <p id="registrationform">Password: {{user_form.password}}</p>
       <p id="registrationform">Employee Number: {{profile_form.employee_no}}</p>
+      <p id="registrationform">Job Title: {{profile_form.job_title}}</p>
+      <p id="registrationform">Department: {{profile_form.department}}</p>
       <p id="registrationform">Cell Phone Number: {{profile_form.cell_phone}}</p>
       <p id="registrationform">Photo(Optional): {{profile_form.profile_pic}}</p>
       <input type="submit" class="btn btn-primary" value="Register">
@@ -25,5 +27,7 @@
   {% endif %}
     </div>
   </div>
-  <script src="{% static "JS/nuwelede.js" %}"></script>
+  <script>
+    $("#registerMenu").css("background-color", "rgba(48, 150, 150, .95)");
+  </script>
   {% endblock %}

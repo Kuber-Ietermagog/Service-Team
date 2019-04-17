@@ -28,7 +28,7 @@ SECRET_KEY = 'd5irg-7yl9k7w#j^l!a7s)gw4odm^j@&smf=l7ri@q6f=kr_tr'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.236']
+ALLOWED_HOSTS = ['192.168.1.236', '10.0.0.110']
 
 
 # Application definition
@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sslserver',
     'accounts',
-    'clock_card'
+    'clock_card',
+    'time_sheets'
 ]
 
 MIDDLEWARE = [

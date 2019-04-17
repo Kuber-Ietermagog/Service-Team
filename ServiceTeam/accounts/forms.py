@@ -13,4 +13,4 @@ class UserProfileInfoForm(forms.ModelForm):
 
     class Meta():
         model = UserProfileInfo
-        fields = ('profile_pic', 'employee_no', 'cell_phone')
+        fields = ('profile_pic', 'employee_no', 'cell_phone', 'job_title', 'department')

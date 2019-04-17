@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <form method="POST">
+        {% csrf_token %}
+        <p id="registrationform">Name: {{ form.name }}</p>
+        <p id="registrationform">Date: {{ form.date }}</p>
+        <p id="registrationform">Latitude: {{ form.latitude }}</p>
+        <p id="registrationform">Longitude: {{ form.longitude }}</p>
+        <label for="work_drop_down">Work/Travel: </label>
+        <select id="work_drop_down" class="" name="work_st" required="">
+          <option></option>
+          <option value="Call Out">Call Out</option>
+          <option value="Work">Work</option>
+          <option value="Travel">Travel</option>
+        </select>
+        <p></p>
+        <button onclick="getLocation()" type="button" class="btn btn-primary">Get Location/Time</button>
+        <script>
+          var x = document.getElementById("glob_pos");
+          function getLocation() {
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+              x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+          }
+          function convertUTCDateToLocalDate(date) {
+            var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+            var offset = date.getTimezoneOffset() / 60;
+            var hours = date.getHours();
+
+            newDate.setHours(hours - offset);
+
+            return newDate;
+          }
+          function showPosition(position) {
+            document.getElementById("id_latitude").value = position.coords.latitude;
+            document.getElementById("id_longitude").value = position.coords.longitude;
+            var date = convertUTCDateToLocalDate(new Date());
+            var now = new Date(date).toJSON().substring(0,19).replace('T', ' ');
+            document.getElementById("id_date").value = now;
+            document.getElementById("work_drop_down").value;
+          }
+          $("#clockMenu").css("background-color", "rgba(48, 150, 150, .95)");
+        </script>
+        <hr>
+        <input type="submit" class="btn btn-warning glyphicon glyphicon-plus" value="Clock Now">
+      </form>
+    </div>
+  </div>
+  {% endblock %}
