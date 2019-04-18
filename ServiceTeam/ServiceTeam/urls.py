@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from . import views
+from ServiceTeam import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,4 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('clock_card/', include('clock_card.urls', namespace='clock_details')),
     path('time_sheets/', include('time_sheets.urls', namespace='time_sheets'))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -240,7 +240,7 @@ input{
 
 @media print{
   #printlogo{
-    display: none;
+    display: block;
   }
   #printheader{
     display: none;

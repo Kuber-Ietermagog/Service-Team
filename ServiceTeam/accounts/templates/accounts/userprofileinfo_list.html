@@ -31,10 +31,11 @@
         {% else %}
           <p>No Photo!</p>
         {% endif %}
-        <p id="registrationform">Username: {{lede.user.username}}</p>
         <p id="registrationform">Employee Number: {{lede.employee_no}}</p>
         <p id="registrationform">Name: {{lede.user.first_name}}</p>
         <p id="registrationform">Surname: {{lede.user.last_name}}</p>
+        <p id="registrationform">Job Title: {{ lede.job_title }}</p>
+        <p id="registrationform">Department: {{ lede.department }}</p>
         <p id="registrationform">Email: {{lede.user.email}}</p>
         <p id="registrationform">Cell Phone: {{lede.cell_phone}}</p>
         <p></p>
