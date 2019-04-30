@@ -94,6 +94,7 @@ class ClockEventCreateView(CreateView):
         if len(display_filter) == 0:
             clock = "In"
             work = request.POST.get('work_st')
+            map_settings = '&zoom=18.85&size=300x300&markers=color:green|label:P|'
         if len(display_filter) != 0:
             if display_filter[0].clock_io == "In":
                 clock = "Out"
@@ -109,9 +110,9 @@ class ClockEventCreateView(CreateView):
         #gps = geocoder.mapquest([lat, lon], method='reverse', key='JupixZGTQMsr5qIjL2lZXu9VjPP5H7GT')
         gps = geocoder.google([lat, lon], method='reverse', key='AIzaSyCdo7IoKzzwVmrc0ljNkKvYy5GrXef4iog')
         address = gps.address
-        city = gps.city
-        state = gps.state
-        country = gps.country
+        # city = gps.city
+        # state = gps.state
+        # country = gps.country
         save_clock = ClockEntry()
         api_url = 'https://maps.googleapis.com/maps/api/staticmap?center='
         lat_long =  lat + "," + lon
