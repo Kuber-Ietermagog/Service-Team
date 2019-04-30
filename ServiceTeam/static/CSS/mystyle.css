@@ -118,8 +118,26 @@ a{
   font-size: 16px;
 }
 
-#dtstamp{
+#clock_in{
   color: #33bbff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#clock_out{
+  color: yellow;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#hours_worked{
+  color: orange;
+  font-weight:  bold;
+  font-size: 18px;
+}
+
+#total_hours_worked{
+  color: red;
   font-weight: bold;
 }
 
@@ -236,6 +254,9 @@ input{
     padding: 3px;
     font-size: 10px;
   }
+  #map_position{
+    display: block;
+  }
 }
 
 @media print{
@@ -245,11 +266,20 @@ input{
   #printheader{
     display: none;
   }
-  #app_table, th, td{
+
+  #backbtn{
+    display: none;
+  }
+
+  #app_table{
     border: 1px solid black;
     text-align: center;
     padding: 3px;
     font-size: 10px;
+  }
+  #map_position{
+    display: none;
+    border: 1px solid white;
   }
 }
 
@@ -278,4 +308,8 @@ input{
 
 #id_name{
   readonly;
+}
+
+#backbtn{
+  width: 100px;
 }

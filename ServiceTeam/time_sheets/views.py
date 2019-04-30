@@ -12,13 +12,19 @@ class TeamListView(View):
 
     def get(self, request, *args, **kwargs):
         team_members = UserProfileInfo.objects.all()
-        this_month = datetime.today().strftime("%Y-%m")
         pay_month = datetime.today().strftime("%m")
+        this_day = datetime.today().strftime("%d")
+        if pay_month == "01" and int(this_day) < 20:
+            this_month = str(int(datetime.today().strftime("%m")))
+        if pay_month != "01" and pay_month != "12":
+            this_month = str(int(datetime.today().strftime("%m")) + 1)
+        if pay_month == "12":
+            this_month = str(int(datetime.today().strftime("%m")))
         return render(request, 'time_sheets/team_list.html', {'team_members': team_members, 'this_month': this_month})
 
     def post(self, request, *args, **kwargs):
         member = request.POST['thisMember']
-        this_month = datetime.today().strftime("%Y-%m")
+        this_month = request.POST['this_month']
         pay_month = datetime.today().strftime("%m")
         pay_year = datetime.today().strftime("%Y")
         empl_no = ""
@@ -30,8 +36,15 @@ class TeamListView(View):
                 department = items.department
                 job_title = items.job_title
                 empl_no = items.employee_no
-        financial_month = (pay_year+"-"+str(int(pay_month)-1)+"-20") + " to " + (this_month + str("-20"))
-        display_filter = ClockEntry.objects.filter(name=member, date__range=[(pay_year+"-"+str(int(pay_month)-1)+"-19"), (this_month + str("-21"))])
+        this_day = datetime.today().strftime("%d")
+        if this_month == "1":
+            display_filter = ClockEntry.objects.filter(name=member,
+                date__range=[(str(int(pay_year) - 1)+"-"+str(int(this_month)+11)+"-20"), (pay_year + "-" + str(int(this_month)) + str("-20"))])
+            financial_month = (str(int(pay_year) - 1)+"-"+str(int(this_month)+11)+"-20") + " to " + (pay_year + "-" + str(int(this_month)) + str("-19"))
+        if this_month != "1":
+            display_filter = ClockEntry.objects.filter(name=member,
+                date__range=[(str(int(pay_year))+"-"+str(int(this_month)-1)+"-20"), (pay_year + "-" + str(int(this_month)) + str("-20"))])
+            financial_month = (str(int(pay_year))+"-"+str(int(this_month)-1)+"-20") + " to " + (pay_year + "-" + str(int(this_month)) + str("-19"))
         dpi = 0
         time_worked = []
         clocked_hours = []

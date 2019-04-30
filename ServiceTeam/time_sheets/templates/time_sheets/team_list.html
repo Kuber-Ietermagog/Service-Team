@@ -8,14 +8,28 @@
       <table>
         <tr>
           <th>EMPLOYEE No.</th>
-          <th>MONTH</th>
+          <th>MONTH NUMBER</th>
           <th>VIEW</th>
         </tr>
         {% for items in team_members %}
           <tr>
             <td>{{ items.employee_no }}</td>
-            <td>{{ this_month }}</td>
             <form method="POST">
+            <td><select id="work_drop_down" class="" name="this_month" required="">
+              <option value="{{ this_month }}">{{ this_month }}</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </td>
               {% csrf_token %}
               <td><input id="timeSheet" type="submit" class="btn btn-primary glyphicon glyphicon-plus" value="{{ items.user }}" name="thisMember"></td>
             </form>

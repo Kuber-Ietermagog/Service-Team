@@ -17,7 +17,21 @@ class MyClockCardList(View):
         this_month = datetime.today().strftime("%Y-%m")
         pay_month = datetime.today().strftime("%m")
         pay_year = datetime.today().strftime("%Y")
-        display_filter = ClockEntry.objects.filter(name=filter_name, date__range=[(pay_year+"-"+str(int(pay_month)-1)+"-19"), (this_month + str("-21"))])
+        this_day = datetime.today().strftime("%d")
+        if int(this_day) < 20:
+            if pay_month == "01":
+                display_filter = ClockEntry.objects.filter(name=self.request.user.username,
+                    date__range=[(str(int(pay_year) - 1)+"-"+str(int(pay_month)+11)+"-20"), (this_month + str("-20"))])
+            else:
+                display_filter = ClockEntry.objects.filter(name=self.request.user.username,
+                    date__range=[(pay_year+"-"+str(int(pay_month)-1)+"-20"), (this_month + str("-20"))])
+        else:
+            if pay_month != "12":
+                display_filter = ClockEntry.objects.filter(name=self.request.user.username,
+                    date__range=[(pay_year+"-"+str(int(pay_month))+"-20"), (pay_year + "-" + str(int(pay_month) + 1) + str("-20"))])
+            else:
+                display_filter = ClockEntry.objects.filter(name=self.request.user.username,
+                    date__range=[(pay_year + "-"+str(int(pay_month))+"-20"), (str(int(pay_year) + 1)) + "-" + str(int(pay_month) - 11) + str("-20")])
         dpi = 0
         time_worked = []
         clocked_hours = []
@@ -69,40 +83,54 @@ class ClockEventCreateView(CreateView):
         this_month = datetime.today().strftime("%Y-%m")
         pay_month = datetime.today().strftime("%m")
         pay_year = datetime.today().strftime("%Y")
-        myClockCard = ClockEntry.objects.filter(name=self.request.user.username, date__range=[(pay_year+"-"+str(int(pay_month)-1)+"-20"), (this_month + str("-20"))])
+        this_day = datetime.today().strftime("%d")
+        # display_filter = ClockEntry.objects.filter(name=self.request.user.username, date__range=[datetime.today().strftime("%Y-%m") + "-" + str(int(this_day) - 7),
+        #     datetime.today().strftime("%Y-%m") + "-" + str(int(this_day) + 7)])
+        display_filter = ClockEntry.objects.filter(name=self.request.user.username)[:1]
         name = request.POST.get('name')
         date = request.POST.get('date')
         lat = request.POST.get('latitude')
         lon = request.POST.get('longitude')
-        if len(myClockCard) == 0:
+        if len(display_filter) == 0:
             clock = "In"
             work = request.POST.get('work_st')
-        if len(myClockCard) != 0:
-            if myClockCard[0].clock_io == "In":
+        if len(display_filter) != 0:
+            if display_filter[0].clock_io == "In":
                 clock = "Out"
-                work = myClockCard[0].work_st
+                work = display_filter[0].work_st
+                map_settings = '&zoom=18.85&size=300x300&markers=color:red|label:P|'
             else:
                 work = request.POST.get('work_st')
                 clock = "In"
-        gps = geocoder.mapquest([lat, lon], method='reverse', key='JupixZGTQMsr5qIjL2lZXu9VjPP5H7GT')
-        street = gps.street
+                if work != "Travel":
+                    map_settings = '&zoom=18.85&size=300x300&markers=color:orange|label:P|'
+                else:
+                    map_settings = '&zoom=18.85&size=300x300&markers=color:green|label:P|'
+        #gps = geocoder.mapquest([lat, lon], method='reverse', key='JupixZGTQMsr5qIjL2lZXu9VjPP5H7GT')
+        gps = geocoder.google([lat, lon], method='reverse', key='AIzaSyCdo7IoKzzwVmrc0ljNkKvYy5GrXef4iog')
+        address = gps.address
         city = gps.city
         state = gps.state
         country = gps.country
         save_clock = ClockEntry()
+        api_url = 'https://maps.googleapis.com/maps/api/staticmap?center='
+        lat_long =  lat + "," + lon
+        #map_settings = '&zoom=15&size=300x300&markers=color:green|label:P|'
+        api_key = '&key=AIzaSyCdo7IoKzzwVmrc0ljNkKvYy5GrXef4iog'
         save_clock.name = name
         save_clock.date = date
         save_clock.latitude = lat
         save_clock.longitude = lon
-        save_clock.street = street
-        save_clock.city = city
-        save_clock.state = state
-        save_clock.country = country
+        save_clock.address = address
+        #save_clock.city = city
+        #save_clock.state = state
+        #save_clock.country = country
         save_clock.work_st = work
         save_clock.clock_io = clock
+        save_clock.map_url = api_url + lat_long + map_settings + lat_long + api_key
         if clock == "Out":
             tz_diff = timedelta(0, 7200)
-            hrs_work = datetime.strptime(date, "%Y-%m-%d %H:%M:%S") - datetime.strptime(str(myClockCard[0].date).replace('+00:00', ''), "%Y-%m-%d %H:%M:%S")
+            hrs_work = datetime.strptime(date, "%Y-%m-%d %H:%M:%S") - datetime.strptime(str(display_filter[0].date).replace('+00:00', ''), "%Y-%m-%d %H:%M:%S")
             save_clock.hours_worked = str(hrs_work - tz_diff)
         else:
             save_clock.hours_worked = ""

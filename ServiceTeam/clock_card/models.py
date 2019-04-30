@@ -12,6 +12,8 @@ class ClockEntry(models.Model):
     city = models.CharField(blank=True, max_length=100)
     state = models.CharField(blank=True, max_length=100)
     country = models.CharField(blank=True, max_length=100)
+    address = models.CharField(blank=True, max_length=100)
+    map_url = models.CharField(blank=True, max_length=500)
     work_st = models.CharField(max_length=100)
     clock_io = models.CharField(max_length=100)
     hours_worked = models.CharField(blank=True, max_length=100)

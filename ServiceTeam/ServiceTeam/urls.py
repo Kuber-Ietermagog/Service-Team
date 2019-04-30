@@ -25,5 +25,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('clock_card/', include('clock_card.urls', namespace='clock_details')),
-    path('time_sheets/', include('time_sheets.urls', namespace='time_sheets'))
+    path('time_sheets/', include('time_sheets.urls', namespace='time_sheets')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

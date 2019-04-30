@@ -22,23 +22,26 @@ class UserProfileInfo(models.Model):
         return self.user.username
 
     def save(self, *args, **kwargs):
-        if self.profile_pic:
-            pilImage = Img.open(BytesIO(self.profile_pic.read()))
-            for orientation in ExifTags.TAGS.keys():
-                if ExifTags.TAGS[orientation] == 'Orientation':
-                    break
-            exif = dict(pilImage._getexif().items())
+        try:
+            if self.profile_pic:
+                pilImage = Img.open(BytesIO(self.profile_pic.read()))
+                for orientation in ExifTags.TAGS.keys():
+                    if ExifTags.TAGS[orientation] == 'Orientation':
+                        break
+                exif = dict(pilImage._getexif().items())
 
-            if exif[orientation] == 3:
-                pilImage = pilImage.rotate(180, expand=True)
-            elif exif[orientation] == 6:
-                pilImage = pilImage.rotate(270, expand=True)
-            elif exif[orientation] == 8:
-                pilImage = pilImage.rotate(90, expand=True)
+                if exif[orientation] == 3:
+                    pilImage = pilImage.rotate(180, expand=True)
+                elif exif[orientation] == 6:
+                    pilImage = pilImage.rotate(270, expand=True)
+                elif exif[orientation] == 8:
+                    pilImage = pilImage.rotate(90, expand=True)
 
-            output = BytesIO()
-            pilImage.save(output, format='JPEG', quality=75)
-            output.seek(0)
-            self.profile_pic = File(output, self.profile_pic.name)
+                output = BytesIO()
+                pilImage.save(output, format='JPEG', quality=75)
+                output.seek(0)
+                self.profile_pic = File(output, self.profile_pic.name)
 
-        return super(UserProfileInfo, self).save(*args, **kwargs)
+            return super(UserProfileInfo, self).save(*args, **kwargs)
+        except:
+            return super(UserProfileInfo, self).save(*args, **kwargs)

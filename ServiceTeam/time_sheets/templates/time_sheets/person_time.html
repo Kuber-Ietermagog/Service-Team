@@ -14,30 +14,40 @@
       <p id="registrationform">Total Hours: {{ time_clocked }}</p>
       <table id="app_table">
         <tr>
-          <th>Name</th>
-          <th>Date</th>
-          <th>Street</th>
-          <th>City</th>
-          <th>Country</th>
-          <th>Work Type</th>
-          <th>Clock</th>
-          <th>Hours</th>
+          <th id="app_table">Name</th>
+          <th id="app_table">Date</th>
+          <th id="app_table">Address</th>
+          <th id="app_table">Work</th>
+          <th id="app_table">Clock</th>
+          <th id="app_table">Hours</th>
+          <th id="map_position">Location</th>
         </tr>
       {% for items in myClockCard %}
         <tr>
-          <td>{{ items.name }}</td>
-          <td>{{ items.date }}</td>
-          <td>{{ items.street }}</td>
-          <td>{{ items.city }}</td>
-          <td>{{ items.country }}</td>
-          <td>{{ items.work_st }}</td>
-          <td>{{ items.clock_io }}</td>
-          <td>{{ items.hours_worked }}</td>
+          <td id="app_table">{{ items.name }}</td>
+          <td id="app_table">{{ items.date }}</td>
+          <td id="app_table">{{ items.address }}</td>
+          <td id="app_table">{{ items.work_st }}</td>
+          <td id="app_table">{{ items.clock_io }}</td>
+          <td id="app_table">{{ items.hours_worked }}</td>
+          {% if items.clock_io == "In" %}
+            <td id="map_position"><img src="{{ items.map_url }}" alt=""></td>
+          {% else %}
+            {% if items.work_st == "Travel" %}
+              <td id="map_position"><img src="{{ items.map_url }}" alt=""></td>
+            {% else %}
+              <td></td>
+            {% endif %}
+          {% endif %}
         </tr>
       {% endfor %}
       </table>
       <p></p>
-      <a  href="{% url 'time_sheets:teamlist' %}" class="btn btn-primary glyphicon glyphicon-step-backward" role="button" id="printheader"> Back</a>
+      <p id="printlogo">Approved by:___________________</p>
+      <p></p>
+      <p id="printlogo">Signed:________________________</p>
+      <p></p>
+      <a  href="{% url 'time_sheets:teamlist' %}" class="btn btn-warning glyphicon glyphicon-step-backward" role="button" id="backbtn"> Back</a>
     </div>
   </div>
   <script>

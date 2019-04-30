@@ -5,31 +5,28 @@
     <button id="printheader" onclick="window.location='{% url 'clock_card:clock_entry' %}'"type="button" class="btn btn-warning glyphicon glyphicon-plus event"> Clock Now</button>
     <p></p>
     <div class="jumbotron" id="myjumbotron">
-      <p id="registrationform">Total Hours: {{ time_clocked }}</p>
-      <table id="app_table">
-        <tr>
-          <th>Name</th>
-          <th>Date</th>
-          <th>Street</th>
-          <th>City</th>
-          <th>Country</th>
-          <th>Work Type</th>
-          <th>Clock</th>
-          <th>Hours</th>
-        </tr>
+      <p id="total_hours_worked">Total Hours: {{ time_clocked }}</p>
+      <hr>
       {% for items in display_filter %}
-        <tr>
-          <td>{{ items.name }}</td>
-          <td>{{ items.date }}</td>
-          <td>{{ items.street }}</td>
-          <td>{{ items.city }}</td>
-          <td>{{ items.country }}</td>
-          <td>{{ items.work_st }}</td>
-          <td>{{ items.clock_io }}</td>
-          <td>{{ items.hours_worked }}</td>
-        </tr>
+        {% if items.clock_io == "In" %}
+          <img src="{{ items.map_url }}" alt="">
+          <p></p>
+          <p id="registrationform">Type of work: {{ items.work_st }}</p>
+          <p id="clock_in">Location clocked in: {{ items.address }}</p>
+          <span id="clock_in"> {{ items.clock_io}}, {{ items.date }}</span>
+          <p></p>
+        {% else %}
+        <hr>
+        <p id="hours_worked">Hours Worked: {{ items.hours_worked }}</p>
+        {% if items.work_st == "Travel" %}
+          <img src="{{ items.map_url }}" alt="">
+          <p></p>
+        {% endif %}
+        <span id="clock_out"> {{ items.clock_io}}, {{ items.date }}</span>
+        <p></p>
+        <p id="clock_out">Location clocked out: {{ items.address }}</p>
+        {% endif %}
       {% endfor %}
-    </table>
     </div>
   </div>
   <script>
