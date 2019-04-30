@@ -107,8 +107,8 @@ class ClockEventCreateView(CreateView):
                     map_settings = '&zoom=18.85&size=300x300&markers=color:orange|label:P|'
                 else:
                     map_settings = '&zoom=18.85&size=300x300&markers=color:green|label:P|'
-        #gps = geocoder.mapquest([lat, lon], method='reverse', key='JupixZGTQMsr5qIjL2lZXu9VjPP5H7GT')
-        gps = geocoder.google([lat, lon], method='reverse', key='AIzaSyCdo7IoKzzwVmrc0ljNkKvYy5GrXef4iog')
+        ##Removed the Google API KEY
+        api_key = "None of your business"
         address = gps.address
         # city = gps.city
         # state = gps.state
