@@ -108,7 +108,6 @@ class ClockEventCreateView(CreateView):
                 else:
                     map_settings = '&zoom=18.85&size=300x300&markers=color:green|label:P|'
         ##Removed the Google API KEY
-        api_key = "None of your business"
         address = gps.address
         # city = gps.city
         # state = gps.state
@@ -117,7 +116,7 @@ class ClockEventCreateView(CreateView):
         api_url = 'https://maps.googleapis.com/maps/api/staticmap?center='
         lat_long =  lat + "," + lon
         #map_settings = '&zoom=15&size=300x300&markers=color:green|label:P|'
-        api_key = '&key=AIzaSyCdo7IoKzzwVmrc0ljNkKvYy5GrXef4iog'
+        api_key = 'none of your business'
         save_clock.name = name
         save_clock.date = date
         save_clock.latitude = lat
